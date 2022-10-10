@@ -18,7 +18,9 @@ const User = require("./User")(sequelize, Model, DataTypes);
 // Luego de definir los modelos, se pueden establecer relaciones
 // entre los mismos...
 User.hasMany(Article);
-Article.hasMany(Comment);
+Article.hasMany(Comment, {
+  onDelete: "cascade",
+});
 User.hasMany(Comment);
 Article.belongsTo(User);
 Comment.belongsTo(Article);

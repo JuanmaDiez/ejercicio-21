@@ -19,7 +19,6 @@ module.exports = (sequelize, Model, DataTypes) => {
       },
     },
     {
-      paranoid: true,
       sequelize,
       modelName: "article",
     },
