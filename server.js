@@ -1,14 +1,12 @@
 require("dotenv").config();
 
 const express = require("express");
-const routes = require("./routes");
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const dbInitialSetup = require("./dbInitialSetup");
-const { User } = require("./models/index");
-const bcrypt = require("bcryptjs");
+const passportConfig = require("./config/passport");
 
+const routes = require("./routes");
+const dbInitialSetup = require("./dbInitialSetup");
 const APP_PORT = process.env.APP_PORT || 3000;
 const app = express();
 
@@ -27,44 +25,7 @@ app.use(
 
 app.use(passport.session());
 
-passport.use(
-  new LocalStrategy({ usernameField: "email" }, async function (username, password, done) {
-    // 1. Encontrar al usuario que se esta tratando de autenticar
-    console.log({ username, password });
-    // let user;
-    // try {
-    const user = await User.findOne({ where: { email: username } });
-    console.log(user.email);
-    // } catch (error) {
-    //   // 2. Hubo algun error al hacerlo? Retornemos ese error
-    //   return done(error);
-    // }
-    // 3. Pudiste encontrar un usuario? Si no pudiste, retornemos esa info
-    if (!user) {
-      return done(null, false, { message: "Credenciales incorrectas" });
-    }
-    // 4. Pudiste validar su contrasena? Si no pudiste, retornemos esa info
-    if (password !== "1234") {
-      return done(null, false, { message: "Credenciales incorrectas" });
-    }
-    // 5. Este usuario es quien dice ser. Vamos a autenticar su acceso
-    return done(null, user);
-  }),
-);
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.findByPk(id)
-    .then((user) => {
-      done(null, user); //req.user
-    })
-    .catch(() => {
-      done(error, user);
-    });
-});
+passportConfig(passport);
 
 dbInitialSetup(); // Crea tablas e inserta datos de prueba.
 routes(app);

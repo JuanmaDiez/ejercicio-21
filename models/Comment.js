@@ -8,9 +8,10 @@ module.exports = (sequelize, Model, DataTypes) => {
       },
     },
     {
+      paranoid: true,
       sequelize,
       modelName: "comment",
-    }
+    },
   );
 
   return Comment;

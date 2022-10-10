@@ -14,16 +14,11 @@ function showRegister(req, res) {
 }
 
 async function postRegister(req, res) {
-  const passwordParaHashear = req.body.password;
-  const passwordHasheado = await bcrypt.hash(passwordParaHashear, 10);
-  const [user, created] = await User.findOrCreate({
-    where: { email: req.body.email },
-    defaults: {
-      firstname: req.body.firstName,
-      lastname: req.body.lastName,
-      email: req.body.email,
-      password: passwordHasheado,
-    },
+  const user = await User.Create({
+    firstname: req.body.firstName,
+    lastname: req.body.lastName,
+    email: req.body.email,
+    password: passwordHasheado,
   });
   if (created) {
     req.login(user, () => res.redirect("/admin"));
@@ -47,12 +42,12 @@ async function showAdmin(req, res) {
 }
 
 async function showCrear(req, res) {
-  res.render("crearArticulo");
+  res.render("createArticle");
 }
 
 async function showModificar(req, res) {
   const article = await Article.findByPk(req.params.id, { include: "user" });
-  res.render("modificarArticulo", { article });
+  res.render("editArticle", { article });
 }
 
 async function showArticulo(req, res) {
@@ -61,13 +56,12 @@ async function showArticulo(req, res) {
       {
         model: User,
       },
-      {
-        model: Comment,
-        include: [User],
-      },
     ],
   });
-  const comments = article.comments;
+  const comments = await Comment.findAll({
+    where: { articleId: article.id },
+    include: { model: User, paranoid: false },
+  });
   res.render("articulo", { article, comments });
 }
 
@@ -79,6 +73,11 @@ async function showComentar(req, res) {
 async function showArticles(req, res) {
   const articles = await Article.findAll();
   res.json(articles);
+}
+
+async function showUsers(req, res) {
+  const users = await User.findAll();
+  res.render("users", { users });
 }
 // Otros handlers...
 // ...
@@ -95,4 +94,5 @@ module.exports = {
   showRegister,
   postRegister,
   logOut,
+  showUsers,
 };
