@@ -18,7 +18,6 @@ module.exports = function (passport) {
       if (!checkPassword) {
         return done(null, false, { message: "Credenciales incorrectas" });
       }
-      //console.log(user.id)
       return done(null, user);
     }),
   );
@@ -26,7 +25,7 @@ module.exports = function (passport) {
   passport.serializeUser(function (user, done) {
     done(null, user.id);
   });
-  
+
   passport.deserializeUser(async function (id, done) {
     try {
       const user = await User.findByPk(id);

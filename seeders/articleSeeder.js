@@ -14,7 +14,6 @@ module.exports = async () => {
         min: 1,
         max: 3,
       }),
-      // Cambio aqui de img: "/img/uploads/seeder-img.jpg" //
       img: "seeder-img.jpg",
     });
   }

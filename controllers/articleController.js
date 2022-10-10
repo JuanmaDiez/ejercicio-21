@@ -1,6 +1,12 @@
 const { Article } = require("../models");
 const formidable = require("formidable");
 
+const form = formidable({
+  multiples: true,
+  uploadDir: __dirname + "/../public/img/uploads",
+  keepExtensions: true,
+});
+
 // Display a listing of the resource.
 async function index(req, res) {}
 // Display the specified resource.
@@ -10,11 +16,6 @@ async function create(req, res) {}
 
 // Store a newly created resource in storage.
 async function store(req, res) {
-  const form = formidable({
-    multiples: true,
-    uploadDir: __dirname + "/../public/img/uploads",
-    keepExtensions: true,
-  });
   form.parse(req, async (err, fields, files) => {
     await Article.create({
       title: fields.crearTitulo,
@@ -29,11 +30,6 @@ async function store(req, res) {
 
 // Show the form for editing the specified resource.
 async function edit(req, res) {
-  const form = formidable({
-    multiples: true,
-    uploadDir: __dirname + "/../public/img/uploads",
-    keepExtensions: true,
-  });
   form.parse(req, async (err, fields, files) => {
     console.log(fields);
     await Article.update(
@@ -45,10 +41,6 @@ async function edit(req, res) {
       { where: { id: req.params.id } },
     );
   });
-  // const article = await Article.update(
-  //   { title: req.body.modificarTitulo, content: req.body.modificarContenido },
-  //   { where: { id: req.params.id } },
-  // );
   res.redirect("/admin");
 }
 
