@@ -19,7 +19,7 @@
       <h5>Modificar el articulo : "<%- article.title %> "</h5>
     </div>
     <div class="container">
-      <form method="post" action="/admin/articles/<%= article.id %>/edit">
+      <form method="post" action="/admin/articles/<%= article.id %>/edit" enctype="multipart/form-data">
         <div class="container mt-4 crearArticulo">
           <div class="container p-4">
             <div class="mb-3">
@@ -42,6 +42,16 @@
               >
 <%- article.content %></textarea
               >
+              <div class="mb-3">
+                <label for="image" class="form-label">Seleccionar una imagen</label>
+                <input
+                  class="form-control"
+                  id="modificarImagen"
+                  rows="3"
+                  name="modificarImagen"
+                  type="file"
+                />
+              </div>
               <br />
               <label for="">
                 Creado por <%- article.user.firstname %> <%- article.user.lastname %>

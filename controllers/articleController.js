@@ -15,7 +15,6 @@ async function store(req, res) {
     uploadDir: __dirname + "/../public/img/uploads",
     keepExtensions: true,
   });
-
   form.parse(req, async (err, fields, files) => {
     await Article.create({
       title: fields.crearTitulo,
@@ -30,10 +29,26 @@ async function store(req, res) {
 
 // Show the form for editing the specified resource.
 async function edit(req, res) {
-  const article = await Article.update(
-    { title: req.body.modificarTitulo, content: req.body.modificarContenido },
-    { where: { id: req.params.id } },
-  );
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img/uploads",
+    keepExtensions: true,
+  });
+  form.parse(req, async (err, fields, files) => {
+    console.log(fields);
+    await Article.update(
+      {
+        title: fields.modificarTitulo,
+        content: fields.modificarContenido,
+        image: files.modificarImagen.newFilename,
+      },
+      { where: { id: req.params.id } },
+    );
+  });
+  // const article = await Article.update(
+  //   { title: req.body.modificarTitulo, content: req.body.modificarContenido },
+  //   { where: { id: req.params.id } },
+  // );
   res.redirect("/admin");
 }
 
