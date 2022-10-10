@@ -9,7 +9,6 @@ const form = formidable({
 
 async function store(req, res) {
   form.parse(req, async (err, fields, files) => {
-    console.log(fields);
     await Comment.create({
       content: fields.ingresarComentario,
       articleId: req.params.articleId,

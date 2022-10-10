@@ -7,6 +7,8 @@ const userController = require("../controllers/userController");
 const checkIfAuthenticated = require("../middlewares/checkIfAuthenticated");
 const checkIfWriter = require("../middlewares/checkIfWriter");
 const checkIfAdmin = require("../middlewares/checkIfAdmin");
+const checkIfCanEdit = require("../middlewares/checkIfCanEdit");
+const checkIfCanDelete = require("../middlewares/checkIfCanDelete");
 
 adminRouter.use(checkIfAuthenticated);
 
@@ -18,18 +20,22 @@ adminRouter.post("/articles", articleController.store);
 
 adminRouter.get("/articles/:id/edit", checkIfWriter, pagesController.showModificar);
 
-adminRouter.post("/articles/:id/edit", checkIfWriter, articleController.edit);
+adminRouter.patch("/articles/:id/edit", checkIfCanEdit, articleController.edit);
 
-adminRouter.get("/articles/:id/delete", checkIfWriter, articleController.destroy);
+adminRouter.get("/articles/:id/delete", checkIfCanDelete, articleController.destroy);
 
-adminRouter.get("/articles/:articleId/comments/:commentId/delete", commentController.destroy);
+adminRouter.delete(
+  "/articles/:articleId/comments/:commentId/delete",
+  checkIfCanDelete,
+  commentController.destroy,
+);
 
 adminRouter.get("/users", checkIfAdmin, pagesController.showUsers);
 
-adminRouter.get("/users/:id/delete", userController.destroy);
+adminRouter.delete("/users/:id/delete", userController.destroy);
 
 adminRouter.get("/users/:id/edit", checkIfAdmin, pagesController.showEditUser);
 
-adminRouter.post("/users/:id/edit", userController.edit);
+adminRouter.patch("/users/:id/edit", userController.edit);
 
 module.exports = adminRouter;

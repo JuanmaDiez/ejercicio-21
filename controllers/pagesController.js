@@ -4,7 +4,6 @@ const { Op } = require("sequelize");
 async function showHome(req, res) {
   const authorFilter = req.query.authorFilter;
   const titleFilter = req.query.titleFilter;
-  console.log(titleFilter);
   if (!authorFilter && !titleFilter) {
     const articles = await Article.findAll({ include: "user" });
     res.render("home", { articles });

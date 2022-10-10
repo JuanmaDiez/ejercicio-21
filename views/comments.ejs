@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Comments</title>
+  </head>
+  <body>
+    <%- include("./partials/navbar-admin") %> <% for (let comment of comments) {%>
+        <table class="container d-flex justify-content-center mt-4" id="adminTable">
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+          <tr id="usuario<%= comment.id %>">
+            <td><%= comment.id %></td>
+            <td><%= comment.firstname %> <%= comment.lastname %></td>
+            <td><%= comment.role %></td>
+            <td>
+              <span>
+                <a href="/admin/comments/<%= comment.id%>/edit" class="btn btn-warning">Editar</a>
+                <a href="/admin/comments/<%= comment.id%>/delete" class="btn btn-danger">Eliminar</a></span
+              >
+            </td>
+          </tr>
+        </table>
+        <% }; %>
+      </body>
+      <%- include("partials/footer") %> <%- include("partials/scripts") %>
+  </body>
+</html>

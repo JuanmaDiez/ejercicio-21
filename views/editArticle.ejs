@@ -19,7 +19,11 @@
       <h5>Modificar el articulo : "<%- article.title %> "</h5>
     </div>
     <div class="container">
-      <form method="post" action="/admin/articles/<%= article.id %>/edit" enctype="multipart/form-data">
+      <form
+        method="post"
+        action="/admin/articles/<%= article.id %>/edit?_method=PATCH"
+        enctype="multipart/form-data"
+      >
         <div class="container mt-4 crearArticulo">
           <div class="container p-4">
             <div class="mb-3">
@@ -58,6 +62,7 @@
               </label>
             </div>
             <button type="submit" class="btn btn-success">Modificar</button>
+            <input type="hidden" name="_method" value="PATCH" />
           </div>
         </div>
       </form>
