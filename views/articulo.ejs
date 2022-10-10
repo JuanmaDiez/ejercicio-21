@@ -30,39 +30,6 @@
           
             <div class="mb-3">
               <h4>Comentar</h4>
-
-              <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-              <input
-                type="text"
-                class="form-control"
-                id="ingresarNombre"
-                name="ingresarNombre"
-                placeholder="Ingresar nombre..."
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Apellido</label>
-              <input
-                type="text"
-                class="form-control"
-                id="ingresarApellido"
-                name="ingresarApellido"
-                placeholder="Ingresar apellido..."
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">E-mail</label>
-              <input
-                type="email"
-                class="form-control"
-                id="ingresarEmail"
-                name="ingresarEmail"
-                placeholder="Ingresar e-mail..."
-                required
-              />
-            </div>
             <div class="mb-3">
               <textarea
                 name="ingresarComentario"
@@ -91,6 +58,6 @@
       
     </div>
 
-    <% include("partials/footer") %>
+    <% include("partials/footer") %> <%- include("partials/scripts") %>
   </body>
 </html>

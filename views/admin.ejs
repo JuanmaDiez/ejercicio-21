@@ -15,10 +15,11 @@
   </head>
   <body>
     <%- include("./partials/navbar-admin") %> <% if (user.role === 4) { %>
-    <div class="m-3" id="adminCrearLink">
+    <div class="m-3 d-flex justify-content-between" id="adminCrearLink">
       <p class="m-4">
         Crear un articulo: <a href="/admin/articles/create" class="btn btn-success">Aqui</a>
       </p>
+      <a href="/admin/users" class="btn btn-primary d-flex m-4 align-items-center">Users</a>
     </div>
 
     <table class="container d-flex justify-content-center mt-4" id="adminTable">
@@ -53,7 +54,7 @@
       </tr>
       <% }; %>
     </table>
-    <a href="/admin/users" class="btn btn-primary">Users</a>
+
     <% } %> <% if (user.role === 3) { %>
     <div class="m-3" id="adminCrearLink">
       <p class="m-4">
@@ -160,6 +161,6 @@
       </tr>
       <% }; %>
     </table>
-    <% } %> <%- include("partials/footer") %>
+    <% } %> <%- include("partials/footer") %> <%- include("partials/scripts") %>
   </body>
 </html>

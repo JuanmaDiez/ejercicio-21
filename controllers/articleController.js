@@ -1,4 +1,4 @@
-const { Article, User, Comment } = require("../models");
+const { Article } = require("../models");
 const formidable = require("formidable");
 
 // Display a listing of the resource.
@@ -17,21 +17,10 @@ async function store(req, res) {
   });
 
   form.parse(req, async (err, fields, files) => {
-    console.log(files);
-    console.log(fields);
-    let user = await User.findOne({ where: { email: fields.ingresarEmail } });
-    if (!user) {
-      user = await User.create({
-        firstname: fields.ingresarNombre,
-        lastname: fields.ingresarApellido,
-        email: fields.ingresarEmail,
-      });
-    }
-
     await Article.create({
       title: fields.crearTitulo,
       content: fields.crearContenido,
-      userId: user.id,
+      userId: req.user.id,
       img: files.image.newFilename,
     });
 

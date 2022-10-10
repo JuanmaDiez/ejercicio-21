@@ -1,22 +1,16 @@
-<style>
-  #navbar {
-    background-color: black;
-    padding: 5px;
-  }
-  .navbarTitle {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 27px;
-    color: white;
-  }
-</style>
 <nav id="navbar">
   <div class="d-flex justify-content-between align-items-center">
     <h4 class="navbarTitle">Hack de blog</h4>
-    <a href="/admin" id="button" class="btn btn-primary">Admin</a>
-    <a href="/login" id="button" class="btn btn-primary">Login</a>
-    <a href="/register" id="button" class="btn btn-primary">Register</a>
+    <% if (!user) { %>
+    <div>
+      <a href="/login" id="button" class="btn btn-primary">Login</a>
+      <a href="/register" id="button" class="btn btn-primary">Register</a>
+    </div>
+    <% } else { %>
+    <div>
+      <a href="/admin" id="button" class="btn btn-primary">Admin</a>
+      <a href="/" id="button" class="btn btn-danger">Log Out</a>
+    </div>
+    <% } %>
   </div>
 </nav>

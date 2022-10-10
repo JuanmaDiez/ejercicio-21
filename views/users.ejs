@@ -22,7 +22,6 @@
         <th>Rol</th>
         <th>Acciones</th>
       </tr>
-
       <tr id="usuario<%= user.id %>">
         <td><%= user.id %></td>
         <td><%= user.firstname %> <%= user.lastname %></td>
@@ -36,5 +35,5 @@
     </table>
     <% }; %>
   </body>
-  <%- include("partials/footer") %>
+  <%- include("partials/footer") %> <%- include("partials/scripts") %>
 </html>
