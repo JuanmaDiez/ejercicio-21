@@ -3,6 +3,7 @@ const passport = require("passport");
 const publicRouter = express.Router();
 const pagesController = require("../controllers/pagesController");
 const commentController = require("../controllers/commentController");
+const userController = require("../controllers/userController");
 const redirectIfAuthenticated = require("../middlewares/redirectIfAuthenticated");
 const checkIfAuthenticated = require("../middlewares/checkIfAuthenticated");
 
@@ -20,7 +21,7 @@ publicRouter.post(
 
 publicRouter.get("/register", redirectIfAuthenticated, pagesController.showRegister);
 
-publicRouter.post("/register", pagesController.postRegister);
+publicRouter.post("/register", userController.create);
 
 publicRouter.get("/logout", pagesController.logOut);
 

@@ -11,6 +11,34 @@
     <%- include("partials/navbar") %> <%- include("partials/header") %>
     <section id="seccionMedia">
       <div class="container">
+        <form action="/" class="mt-4 crearArticulo" method="get">
+          <div class="p-4">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Buscar por autor</label>
+              <input
+                type="text"
+                class="form-control"
+                id="authorFilter"
+                name="authorFilter"
+                placeholder="Ingrese autor..."
+              />
+            </div>
+          </div>
+        </form>
+        <form action="/" class="mt-4 crearArticulo" method="get">
+          <div class="p-4">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Buscar por título</label>
+              <input
+                type="text"
+                class="form-control"
+                id="titleFilter"
+                name="titleFilter"
+                placeholder="Ingrese título..."
+              />
+            </div>
+          </div>
+        </form>
         <% for (let article of articles.reverse()) { %>
 
         <div class="divArticuloHome">

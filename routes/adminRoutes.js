@@ -28,4 +28,8 @@ adminRouter.get("/users", checkIfAdmin, pagesController.showUsers);
 
 adminRouter.get("/users/:id/delete", userController.destroy);
 
+adminRouter.get("/users/:id/edit", checkIfAdmin, pagesController.showEditUser);
+
+adminRouter.post("/users/:id/edit", userController.edit);
+
 module.exports = adminRouter;

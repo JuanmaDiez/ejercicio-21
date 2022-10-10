@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Modificar</title>
+  </head>
+  <body>
+    <%- include("./partials/navbar-admin") %>
+    <div class="d-flex justify-content-center container mt-4 p-4">
+      <h5>Modificar el usuario : <%= user.firstname %> <%= user.lastname %></h5>
+    </div>
+    <div class="container">
+      <form
+        method="post"
+        action="/admin/users/<%= user.id %>/edit"
+        enctype="multipart/form-data"
+      >
+        <div class="container mt-4 crearArticulo">
+          <div class="container p-4">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="editName"
+                name="editName"
+                value="<%= user.firstname %>"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Apellido</label>
+              <input
+                type="text"
+                class="form-control"
+                id="editLastname"
+                name="editLastname"
+                value="<%= user.lastname %>"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                id="editEmail"
+                name="editEmail"
+                value="<%= user.email%>"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="editPassword"
+                name="editPassword"
+                value="<%= user.password%>"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Role</label>
+              <input
+                type="number"
+                class="form-control"
+                id="editRole"
+                name="editRole"
+                value="<%= user.role%>"
+              />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-success">Modificar</button>
+          </div>
+        </div>
+      </form>
+      <a class="back" href="/admin"> <i class="fa-solid fa-left-long"></i> Volver </a>
+    </div>
+  </body>
+</html>

@@ -31,7 +31,6 @@ async function store(req, res) {
 // Show the form for editing the specified resource.
 async function edit(req, res) {
   form.parse(req, async (err, fields, files) => {
-    console.log(fields);
     await Article.update(
       {
         title: fields.modificarTitulo,

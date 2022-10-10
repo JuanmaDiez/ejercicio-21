@@ -1,8 +1,28 @@
 const { Article, User, Comment } = require("../models");
+const { Op } = require("sequelize");
 
 async function showHome(req, res) {
-  const articles = await Article.findAll({ include: "user" });
-  res.render("home", { articles });
+  const authorFilter = req.query.authorFilter;
+  const titleFilter = req.query.titleFilter;
+  console.log(titleFilter);
+  if (!authorFilter && !titleFilter) {
+    const articles = await Article.findAll({ include: "user" });
+    res.render("home", { articles });
+  }
+  if (authorFilter) {
+    const user = await User.findOne({
+      where: { [Op.or]: [{ firstname: authorFilter }, { lastname: authorFilter }] },
+    });
+    const articles = await Article.findAll({ include: "user", where: { userId: user.id } });
+    res.render("home", { articles });
+  }
+  if (titleFilter) {
+    const articles = await Article.findAll({
+      include: "user",
+      where: { title: { [Op.like]: `%${titleFilter}%` } },
+    });
+    res.render("home", { articles });
+  }
 }
 
 function showLogin(req, res) {
@@ -11,20 +31,6 @@ function showLogin(req, res) {
 
 function showRegister(req, res) {
   res.render("register");
-}
-
-async function postRegister(req, res) {
-  const user = await User.Create({
-    firstname: req.body.firstName,
-    lastname: req.body.lastName,
-    email: req.body.email,
-    password: passwordHasheado,
-  });
-  if (created) {
-    req.login(user, () => res.redirect("/admin"));
-  } else {
-    res.redirect("back");
-  }
 }
 
 function logOut(req, res, next) {
@@ -79,6 +85,11 @@ async function showUsers(req, res) {
   const users = await User.findAll();
   res.render("users", { users });
 }
+
+async function showEditUser(req, res) {
+  const user = await User.findOne({ where: { id: req.params.id } });
+  res.render("editUser", { user });
+}
 // Otros handlers...
 // ...
 
@@ -92,7 +103,7 @@ module.exports = {
   showArticles,
   showLogin,
   showRegister,
-  postRegister,
   logOut,
   showUsers,
+  showEditUser,
 };
