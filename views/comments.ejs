@@ -18,19 +18,23 @@
         <table class="container d-flex justify-content-center mt-4" id="adminTable">
           <tr>
             <th>Id</th>
-            <th>Nombre</th>
-            <th>Rol</th>
+            <th>Autor</th>
+            <th>Contenido</th>
             <th>Acciones</th>
           </tr>
-          <tr id="usuario<%= comment.id %>">
+          <tr id="comentario<%= comment.id %>">
             <td><%= comment.id %></td>
-            <td><%= comment.firstname %> <%= comment.lastname %></td>
-            <td><%= comment.role %></td>
+            <td><%= comment.user.firstname %> <%= comment.user.lastname %></td>
+            <td><%= comment.content %></td>
             <td>
               <span>
+              <% if(user.id === comment.userId) { %> 
                 <a href="/admin/comments/<%= comment.id%>/edit" class="btn btn-warning">Editar</a>
-                <a href="/admin/comments/<%= comment.id%>/delete" class="btn btn-danger">Eliminar</a></span
-              >
+              <% } %> 
+              <form action="/admin/comments/<%= comment.id%>/delete?_method=DELETE" method="post">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+              </form>
+              </span>
             </td>
           </tr>
         </table>

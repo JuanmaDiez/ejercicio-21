@@ -70,11 +70,6 @@ async function showArticulo(req, res) {
   res.render("articulo", { article, comments });
 }
 
-async function showComentar(req, res) {
-  const article = await Article.findByPk(req.params.id);
-  res.render("addComment", { article });
-}
-
 async function showArticles(req, res) {
   const articles = await Article.findAll();
   res.json(articles);
@@ -86,8 +81,24 @@ async function showUsers(req, res) {
 }
 
 async function showEditUser(req, res) {
-  const user = await User.findOne({ where: { id: req.params.id } });
+  const user = await User.findOne({
+    where: { id: req.params.id },
+    include: { model: User, paranoid: false },
+  });
   res.render("editUser", { user });
+}
+
+async function showComments(req, res) {
+  const comments = await Comment.findAll({ include: { model: User, paranoid: false } });
+  res.render("comments", { comments });
+}
+
+async function showEditComment(req, res) {
+  const comment = await Comment.findOne({
+    where: { id: req.params.id },
+    include: { model: User, paranoid: false },
+  });
+  res.render("editComment", { comment });
 }
 // Otros handlers...
 // ...
@@ -98,11 +109,12 @@ module.exports = {
   showCrear,
   showModificar,
   showArticulo,
-  showComentar,
   showArticles,
   showLogin,
   showRegister,
+  showComments,
   logOut,
   showUsers,
   showEditUser,
+  showEditComment,
 };

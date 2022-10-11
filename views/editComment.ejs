@@ -16,50 +16,28 @@
   <body>
     <%- include("./partials/navbar-admin") %>
     <div class="d-flex justify-content-center container mt-4 p-4">
-      <h5>Modificar el articulo : "<%- article.title %> "</h5>
+      <h5>
+        Modificar el comentario de <%= comment.user.firstname %> <%= comment.user.lastname %> en el
+        artículo <%= comment.articleId %>
+      </h5>
     </div>
     <div class="container">
       <form
         method="post"
-        action="/admin/articles/<%= article.id %>/edit?_method=PATCH"
+        action="/admin/comments/<%= comment.id %>/edit?_method=PATCH"
         enctype="multipart/form-data"
       >
         <div class="container mt-4 crearArticulo">
-          <div class="container p-4">
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Titulo</label>
-              <input
-                type="text"
-                class="form-control"
-                id="modificarTitulo"
-                name="modificarTitulo"
-                value="<%- article.title %>"
-              />
-            </div>
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Contenido</label>
               <textarea
                 class="form-control"
-                id="modificarContenido"
+                id="modificarContenidoComentario"
                 rows="3"
-                name="modificarContenido"
+                name="modificarContenidoComentario"
               >
-<%- article.content %></textarea
+<%- comment.content %></textarea
               >
-              <div class="mb-3">
-                <label for="image" class="form-label">Seleccionar una imagen</label>
-                <input
-                  class="form-control"
-                  id="modificarImagen"
-                  rows="3"
-                  name="modificarImagen"
-                  type="file"
-                />
-              </div>
-              <br />
-              <label for="">
-                Creado por <%- article.user.firstname %> <%- article.user.lastname %>
-              </label>
             </div>
             <button type="submit" class="btn btn-success">Modificar</button>
           </div>

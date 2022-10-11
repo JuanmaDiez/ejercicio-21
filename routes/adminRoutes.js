@@ -22,13 +22,7 @@ adminRouter.get("/articles/:id/edit", checkIfWriter, pagesController.showModific
 
 adminRouter.patch("/articles/:id/edit", checkIfCanEdit, articleController.edit);
 
-adminRouter.get("/articles/:id/delete", checkIfCanDelete, articleController.destroy);
-
-adminRouter.delete(
-  "/articles/:articleId/comments/:commentId/delete",
-  checkIfCanDelete,
-  commentController.destroy,
-);
+adminRouter.delete("/articles/:id/delete", checkIfCanDelete, articleController.destroy);
 
 adminRouter.get("/users", checkIfAdmin, pagesController.showUsers);
 
@@ -37,5 +31,13 @@ adminRouter.delete("/users/:id/delete", userController.destroy);
 adminRouter.get("/users/:id/edit", checkIfAdmin, pagesController.showEditUser);
 
 adminRouter.patch("/users/:id/edit", userController.edit);
+
+adminRouter.get("/comments", checkIfAdmin, pagesController.showComments);
+
+adminRouter.get("/comments/:id/edit", checkIfWriter, pagesController.showEditComment);
+
+adminRouter.patch("/comments/:id/edit", checkIfCanEdit, commentController.edit);
+
+adminRouter.delete("/comments/:id/delete", checkIfCanDelete, commentController.destroy);
 
 module.exports = adminRouter;

@@ -18,12 +18,24 @@ async function store(req, res) {
   });
 }
 
+async function edit(req, res) {
+  form.parse(req, async (err, fields, files) => {
+    await Comment.update(
+      {
+        content: fields.modificarContenidoComentario,
+      },
+      { where: { id: req.params.id } },
+    );
+    res.redirect("/admin/comments");
+  });
+}
 async function destroy(req, res) {
-  await Comment.destroy({ where: { id: req.params.commentId } });
-  res.redirect(`/articles/${req.params.articleId}`);
+  await Comment.destroy({ where: { id: req.params.id } });
+  res.redirect("/admin/comments");
 }
 
 module.exports = {
   destroy,
+  edit,
   store,
 };

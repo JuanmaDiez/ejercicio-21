@@ -19,7 +19,12 @@
       <p class="m-4">
         Crear un articulo: <a href="/admin/articles/create" class="btn btn-success">Aqui</a>
       </p>
-      <a href="/admin/users" class="btn btn-primary d-flex m-4 align-items-center">Users</a>
+      <span>
+        <a href="/admin/users" class="btn btn-primary d-flex m-4 align-items-center">Users</a>
+        <a href="/admin/comments" class="btn btn-primary d-flex m-4 align-items-center"
+          >Comentarios</a
+        >
+      </span>
     </div>
 
     <table class="container d-flex justify-content-center mt-4" id="adminTable">
@@ -43,22 +48,25 @@
           />
         </td>
         <td>
-          <span
-            ><a href="/admin/articles/<%= article.id%>/edit" class="btn btn-primary">Modificar</a>
-            <a href="/admin/articles/<%- article.id%>/delete" class="btn btn-danger"
-              >Eliminar</a
-            ></span
-          >
+          <span>
+            <a href="/admin/articles/<%= article.id%>/edit" class="btn btn-primary">Modificar</a>
+            <form action="/admin/articles/<%=article.id%>/delete?_method=DELETE" method="post">
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </span>
         </td>
       </tr>
       <% }; %>
     </table>
 
     <% } %> <% if (user.role === 3) { %>
-    <div class="m-3" id="adminCrearLink">
+    <div class="m-3 d-flex justify-content-between" id="adminCrearLink">
       <p class="m-4">
         Crear un articulo: <a href="/admin/articles/create" class="btn btn-success">Aqui</a>
       </p>
+      <a href="/admin/comments" class="btn btn-primary d-flex m-4 align-items-center"
+        >Comentarios</a
+      >
     </div>
 
     <table class="container d-flex justify-content-center mt-4" id="adminTable">
@@ -83,23 +91,26 @@
           />
         </td>
         <td>
-          <span
-            ><a href="/admin/articles/<%= article.id%>/edit" class="btn btn-primary">Modificar</a>
+          <span>
+            <a href="/admin/articles/<%= article.id%>/edit" class="btn btn-primary">Modificar</a>
             <% if (user.id === article.userId) {%>
-            <a href="/admin/articles/<%- article.id%>/delete" class="btn btn-danger"
-              >Eliminar</a
-            ></span
-          >
+            <form action="/admin/articles/<%=article.id%>/delete?_method=DELETE" method="post">
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </span>
           <% }; %>
         </td>
       </tr>
       <% }; %>
     </table>
     <% } %> <% if (user.role === 2) { %>
-    <div class="m-3" id="adminCrearLink">
+    <div class="m-3 d-flex justify-content-between" id="adminCrearLink">
       <p class="m-4">
         Crear un articulo: <a href="/admin/articles/create" class="btn btn-success">Aqui</a>
       </p>
+      <a href="/admin/comments" class="btn btn-primary d-flex m-4 align-items-center"
+        >Comentarios</a
+      >
     </div>
 
     <table class="container d-flex justify-content-center mt-4" id="adminTable">
@@ -125,12 +136,12 @@
         </td>
         <td>
           <% if (user.id === article.userId) {%>
-          <span
-            ><a href="/admin/articles/<%= article.id%>/edit" class="btn btn-primary">Modificar</a
-            ><a href="/admin/articles/<%- article.id%>/delete" class="btn btn-danger"
-              >Eliminar</a
-            ></span
-          >
+          <span>
+            <a href="/admin/articles/<%= article.id%>/edit" class="btn btn-primary">Modificar</a>
+            <form action="/admin/articles/<%=article.id%>/delete?_method=DELETE" method="post">
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </span>
           <% }; %>
         </td>
       </tr>
