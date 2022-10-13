@@ -29,6 +29,4 @@ publicRouter.get("/articles/:id", pagesController.showArticulo);
 
 publicRouter.post("/articles/:articleId/comments", checkIfAuthenticated, commentController.store);
 
-publicRouter.get("/api/articulos", pagesController.showArticles);
-
 module.exports = publicRouter;

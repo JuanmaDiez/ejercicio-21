@@ -1,9 +1,9 @@
 const { Article, User, Comment } = require("../models");
 const { Op } = require("sequelize");
 
+
 async function showHome(req, res) {
-  const authorFilter = req.query.authorFilter;
-  const titleFilter = req.query.titleFilter;
+  const { authorFilter, titleFilter } = req.query;
   if (!authorFilter && !titleFilter) {
     const articles = await Article.findAll({ include: "user" });
     res.render("home", { articles });
@@ -70,11 +70,6 @@ async function showArticulo(req, res) {
   res.render("articulo", { article, comments });
 }
 
-async function showArticles(req, res) {
-  const articles = await Article.findAll();
-  res.json(articles);
-}
-
 async function showUsers(req, res) {
   const users = await User.findAll();
   res.render("users", { users });
@@ -109,7 +104,6 @@ module.exports = {
   showCrear,
   showModificar,
   showArticulo,
-  showArticles,
   showLogin,
   showRegister,
   showComments,
