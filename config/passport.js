@@ -7,7 +7,7 @@ module.exports = function (passport) {
       let user;
 
       try {
-        user = await User.findOne({ where: { email: username } });
+        user = await User.findOne({ email: username });
       } catch (error) {
         return done(error);
       }
@@ -28,7 +28,7 @@ module.exports = function (passport) {
 
   passport.deserializeUser(async function (id, done) {
     try {
-      const user = await User.findByPk(id);
+      const user = await User.findById(id);
 
       done(null, user);
     } catch (error) {
